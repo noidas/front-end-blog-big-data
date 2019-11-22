@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const apii = axios.create({
-  // baseURL: "https://api-blog-pos.herokuapp.com"
-  baseURL: "http://localhost:3333"
+  baseURL: "https://api-blog-pos.herokuapp.com"
+  // baseURL: "http://localhost:3333"
 });
 
 async function storeUser(user) {
