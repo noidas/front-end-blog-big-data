@@ -46,7 +46,7 @@ export default withRouter(props => {
             <Profile name={blog.name} description={blog.description}></Profile>
           </Col>
           <Col md={17} sm={24}>
-            {auth._id === blogid ? (
+            {auth._id === blog.iduser ? (
               <Row type="flex" justify="end" style={{ marginBottom: 20 }}>
                 <Tooltip title="Deletar Postagem">
                   <Button

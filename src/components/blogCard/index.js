@@ -1,10 +1,12 @@
 import React from "react";
 import { Row, Col, Card } from "antd";
-import "./index.scss";
 import { Link } from "react-router-dom";
 import moment from "moment";
 
+import "./index.scss";
+
 moment.locale("pt-br");
+
 export default ({ data, ...props }) => {
   return (
     <Link to={`/blog/${data._id}`}>

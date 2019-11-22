@@ -19,6 +19,7 @@ export default props => {
       .getBlogById(id)
       .then(response => {
         setBlog(response);
+        console.log("response:");
         console.log(response);
       })
       .catch(error => console.log(error));
@@ -36,7 +37,7 @@ export default props => {
               <h1 style={{ fontSize: 20, marginBottom: 20 }}>
                 Lista de Postagens
               </h1>
-              {auth._id === id ? (
+              {auth._id === blog.iduser ? (
                 <Link to={`/blog/${blog._id}/post/cadastrar`}>
                   <Button type="primary">Cadastrar Nova Postagem</Button>
                 </Link>

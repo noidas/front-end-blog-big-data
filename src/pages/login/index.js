@@ -18,7 +18,7 @@ export default Form.create({ name: "login" })(
             .then(response => {
               console.log(response);
               localStorage.setItem("autenticacao", JSON.stringify(response));
-              props.history.push(`/blog/${response._id}`);
+              props.history.push(`/`);
             })
             .catch(error =>
               notification.warning({ message: "e-mail ou senha invalidos!" })

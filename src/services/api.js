@@ -1,9 +1,18 @@
 import axios from "axios";
 
 const apii = axios.create({
-  baseURL: "https://api-blog-pos.herokuapp.com"
-  // baseURL: "http://localhost:3333"
+  // baseURL: "https://api-blog-pos.herokuapp.com"
+  baseURL: "http://localhost:3333"
 });
+
+async function storeUser(user) {
+  return new Promise((resolve, reject) => {
+    apii
+      .post("user", user)
+      .then(response => resolve(response.data))
+      .catch(error => reject(error));
+  });
+}
 
 async function getBlogs() {
   return new Promise((resolve, reject) => {
@@ -32,10 +41,10 @@ async function getPostById(id) {
   });
 }
 
-async function storeBlog(blog) {
+async function storeBlog(id, blog) {
   return new Promise((resolve, reject) => {
     apii
-      .post(`blog`, blog)
+      .post(`user/${id}/blog`, blog)
       .then(response => resolve(response.data))
       .catch(error => reject(error));
   });
@@ -77,6 +86,7 @@ const api = {
   getBlogById,
   getPostById,
   storeBlog,
+  storeUser,
   autenticar,
   storePost,
   deletePost

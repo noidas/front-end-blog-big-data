@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Card, Form, Input, Button, Row } from "antd";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
@@ -9,25 +9,16 @@ import api from "../../services/api";
 export default Form.create({ name: "register" })(
   withRouter(({ form, ...props }) => {
     const { getFieldDecorator } = form;
-    const [auth, setAuth] = useState({});
-
-    useEffect(() => {
-      setAuth(JSON.parse(localStorage.getItem("autenticacao")) || {});
-    }, []);
 
     function submit(e) {
       e.preventDefault();
+
       form.validateFields((err, values) => {
         if (!err) {
-          const blog = {
-            title: values.title,
-            description: values.description,
-            iduser: auth._id,
-            name: auth.name
-          };
+          console.log(values);
 
           api
-            .storeBlog(auth._id, blog)
+            .storeUser(values)
             .then(response => {
               console.log(response);
               props.history.push("/");
@@ -38,27 +29,39 @@ export default Form.create({ name: "register" })(
     }
 
     return (
-      <Template title="Meus Blogs">
-        <Card title="Cadastro de Blog">
+      <Template title="Nova conta">
+        <Card title="Cadastro de nova conta">
           <Form onSubmit={submit}>
-            <Form.Item label="Titulo do Blog">
-              {getFieldDecorator("title", {
+            <Form.Item label="Nome Completo">
+              {getFieldDecorator("name", {
                 rules: [
                   {
                     required: true,
-                    message: "Informe o titulo do blog"
+                    message: "Informe o seu nome"
                   }
                 ]
               })(<Input type="text"></Input>)}
             </Form.Item>
-            <Form.Item label="Descrição do blog">
-              {getFieldDecorator("description", {
+
+            <Form.Item label="E-mail">
+              {getFieldDecorator("email", {
                 rules: [
                   {
-                    message: "Informe uma descrição"
+                    required: true,
+                    message: "Informe o seu e-mail"
                   }
                 ]
-              })(<Input type="text"></Input>)}
+              })(<Input type="email"></Input>)}
+            </Form.Item>
+            <Form.Item label="Senha">
+              {getFieldDecorator("password", {
+                rules: [
+                  {
+                    required: true,
+                    message: "Informe uma senha"
+                  }
+                ]
+              })(<Input type="password"></Input>)}
             </Form.Item>
             <Row type="flex" justify="end">
               <Link to="/">
